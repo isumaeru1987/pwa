@@ -20,7 +20,7 @@ const showCoffees = () => {
       ({ name, image }) =>
         (output += `
                 <div class="card">
-                  <img class="card--avatar" src=${image} />
+                  <img alt=${name} class="card--avatar" src=${image} />
                   <h1 class="card--title">${name}</h1>
                   <a class="card--link" href="#">Taste</a>
                 </div>
