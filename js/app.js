@@ -1,8 +1,8 @@
 const container = document.querySelector(".container")
-const coffees = [
-  { name: "Obelisk", image: "images/obelisk.jpg" },
-  { name: "Slifer", image: "images/slifer.jpg" },
-  { name: "Ra", image: "images/ra.jpg" },
+const cards = [
+  { name: "Obelisk", image: "images/obelisk.jpg", own: 1 },
+  { name: "Slifer", image: "images/slifer.jpg", own: 0 },
+  { name: "Ra", image: "images/ra.jpg", own: 0 },
 ]
 
 if ("serviceWorker" in navigator) {
@@ -14,19 +14,22 @@ if ("serviceWorker" in navigator) {
     })
   }
 
-const showCoffees = () => {
+const showCards = () => {
     let output = ""
-    coffees.forEach(
-      ({ name, image }) =>
-        (output += `
+    cards.forEach(function({name, image, own}){
+        not_in_collection = null
+        if( 0 == own ){
+            not_in_collection = 'card--not-in-collection'
+        }
+
+        output += `
                 <div class="card">
-                  <img alt=${name} class="card--avatar" src=${image} />
+                  <img alt=${name} class="card--avatar ${not_in_collection}" src=${image} />
                   <h1 class="card--title">${name}</h1>
-                  <a class="card--link" href="#">Taste</a>
                 </div>
-                `)
-    )
+                `
+    })
     container.innerHTML = output
   }
   
-  document.addEventListener("DOMContentLoaded", showCoffees)
+  document.addEventListener("DOMContentLoaded", showCards)
